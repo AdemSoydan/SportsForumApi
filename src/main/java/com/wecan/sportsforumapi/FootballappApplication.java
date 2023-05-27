@@ -2,6 +2,7 @@ package com.wecan.sportsforumapi;
 
 import com.wecan.sportsforumapi.entity.Entry;
 import com.wecan.sportsforumapi.entity.Title;
+import com.wecan.sportsforumapi.entity.User;
 import com.wecan.sportsforumapi.repository.UserRepository;
 import com.wecan.sportsforumapi.service.EntryService;
 import com.wecan.sportsforumapi.service.TitleService;
@@ -25,18 +26,23 @@ public class FootballappApplication {
 	}
 
 	private void createInstrcutor(EntryService entryService, TitleService titleService, UserRepository userRepository) {
-		Title title = new Title("besiktas");
+		Title title = new Title("Diego Rossi");
 		titleService.save(title);
+		User adem = new User("adem","ademm.soydan@gmail.com","123");
+		User ali = new User("ali","ali.koc@gmail.com","123");
+		User jorge = new User("jorge","jorge.jesus@gmail.com","123");
+		userRepository.save(adem);
+		userRepository.save(ali);
+		userRepository.save(jorge);
+		Entry entry = new Entry("Düğünümde oynatmamHemen Satın Gitsin bu lavuğu",title,adem);
+		Entry entry2 = new Entry("Aslında fena değil ya",title,ali);
+		Entry entry3 = new Entry("Aşığım bu çocuğa",title,jorge);
 
-		/*Entry entry = new Entry("haydi",title);
-		Entry entry1 = new Entry("güzelim",title);
-		Entry entry2 = new Entry("tiner",title);
-		Entry entry3 = new Entry("cekelim" ,title);
+
 
 		entryService.save(entry);
-		entryService.save(entry1);
 		entryService.save(entry2);
-		entryService.save(entry3);*/
+		entryService.save(entry3);
 	}
 
 

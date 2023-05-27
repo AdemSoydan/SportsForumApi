@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class UserRest {
     UserService service;
@@ -20,6 +22,10 @@ public class UserRest {
     public ResponseEntity getAllUsers(@RequestBody User user){
         System.out.println("istek geldi");
         return service.checkUserIsValid(user);
+    }
+    @GetMapping("/user")
+    public List<User> getAllUser(){
+        return service.findAll();
     }
 
     @PostMapping("/user")

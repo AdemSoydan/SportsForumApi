@@ -1,6 +1,7 @@
 package com.wecan.sportsforumapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Table(name = "entry")
@@ -19,6 +20,7 @@ public class Entry {
     private Title title;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name="user_id", nullable=false)
     private User user;
 
@@ -32,9 +34,6 @@ public class Entry {
         this.user = user;
         this.noOfLiked = noOfLiked;
     }
-
-
-
 
     public Entry(String entryText, Title title, User user) {
         this.entryText = entryText;

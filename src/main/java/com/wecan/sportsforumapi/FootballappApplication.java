@@ -28,7 +28,7 @@ public class FootballappApplication {
 		Title title = new Title("besiktas");
 		titleService.save(title);
 
-		Entry entry = new Entry("haydi",title);
+		/*Entry entry = new Entry("haydi",title);
 		Entry entry1 = new Entry("güzelim",title);
 		Entry entry2 = new Entry("tiner",title);
 		Entry entry3 = new Entry("cekelim" ,title);
@@ -36,7 +36,7 @@ public class FootballappApplication {
 		entryService.save(entry);
 		entryService.save(entry1);
 		entryService.save(entry2);
-		entryService.save(entry3);
+		entryService.save(entry3);*/
 	}
 
 

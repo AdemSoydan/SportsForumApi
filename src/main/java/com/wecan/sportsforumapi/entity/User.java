@@ -1,6 +1,10 @@
 package com.wecan.sportsforumapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.List;
+
 @Table(name = "user")
 @Entity
 public class User {
@@ -14,6 +18,12 @@ public class User {
     private String email;
     @Column(name = "user_psswd")
     private String password;
+
+    @JsonManagedReference()
+    @OneToMany(mappedBy="user")
+    private List<Entry> entries;
+
+
 
     public User(String firstName, String email,String password) {
         this.userName = firstName;

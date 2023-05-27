@@ -18,9 +18,29 @@ public class Entry {
     @JoinColumn(name="title_id", nullable=false)
     private Title title;
 
-    public Entry(String entryText, Title title) {
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable=false)
+    private User user;
+
+
+
+    @Column(name = "number_of_liked")
+    private int noOfLiked;
+    public Entry(String entryText, Title title, User user, int noOfLiked) {
         this.entryText = entryText;
         this.title = title;
+        this.user = user;
+        this.noOfLiked = noOfLiked;
+    }
+
+
+
+
+    public Entry(String entryText, Title title, User user) {
+        this.entryText = entryText;
+        this.title = title;
+        this.user = user;
+        noOfLiked = 0;
     }
 
     @Override
@@ -29,6 +49,7 @@ public class Entry {
                 "eId=" + eId +
                 ", entryText='" + entryText + '\'' +
                 ", title=" + title +
+                 "user"+ user +
                 '}';
     }
 
@@ -58,4 +79,20 @@ public class Entry {
     public void setTitle(Title title) {
         this.title = title;
     }
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public int getNoOfLiked() {
+        return noOfLiked;
+    }
+
+    public void setNoOfLiked(int noOfLiked) {
+        this.noOfLiked = noOfLiked;
+    }
+
 }

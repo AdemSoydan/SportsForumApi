@@ -1,7 +1,10 @@
 package com.wecan.sportsforumapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 @Table(name = "entry")
@@ -13,33 +16,26 @@ public class Entry {
     private int eId;
     @Column(name = "entry_text")
     private String entryText;
-
     @ManyToOne
-    @JsonBackReference
-    @JoinColumn(name="title_id", nullable=false)
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="tId")
+    @JoinColumn(name="title_id")
     private Title title;
 
+
     @ManyToOne
-    @JsonManagedReference
-    @JoinColumn(name="user_id", nullable=false)
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="userId")
+    @JoinColumn(name="user_id")
     private User user;
-
-
 
     @Column(name = "number_of_liked")
     private int noOfLiked;
-    public Entry(String entryText, Title title, User user, int noOfLiked) {
+
+    public Entry(int eId, String entryText, Title title, User user, int noOfLiked) {
+        this.eId = eId;
         this.entryText = entryText;
         this.title = title;
         this.user = user;
         this.noOfLiked = noOfLiked;
-    }
-
-    public Entry(String entryText, Title title, User user) {
-        this.entryText = entryText;
-        this.title = title;
-        this.user = user;
-        noOfLiked = 0;
     }
 
     @Override

@@ -46,8 +46,8 @@ public class UserServiceImpl implements UserService {
         String userName = user.getUserName();
         User dbUser = repository.findByUserName(userName);
         if(dbUser == null || !user.getPassword().equals(dbUser.getPassword()))
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return new ResponseEntity(HttpStatus.CONFLICT);
 
-        return new ResponseEntity(user, HttpStatus.OK);
+        return new ResponseEntity(dbUser, HttpStatus.OK);
     }
 }

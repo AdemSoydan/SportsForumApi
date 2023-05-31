@@ -1,12 +1,17 @@
 package com.wecan.sportsforumapi.service;
 
 import com.wecan.sportsforumapi.entity.Title;
+import com.wecan.sportsforumapi.entity.TitleSaveRequest;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface TitleService {
     Title findById(int id);
-    List<Title> getAllTitles();
+    List<Title> findAll();
+    ResponseEntity save(Title title);
 
-    boolean save(Title title);
+    Title saveTitle(Title title);
+
+    ResponseEntity saveWithEntry(TitleSaveRequest request);
 }

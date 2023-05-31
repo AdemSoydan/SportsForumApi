@@ -3,8 +3,10 @@ package com.wecan.sportsforumapi.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "user")
@@ -18,19 +20,29 @@ public class User {
     private String userName;
     @Column(name = "email")
     private String email;
-    @JsonIgnore
+    @Nullable
     @Column(name = "user_psswd")
     private String password;
 
-    @JsonBackReference
+   // @JsonBackReference
+    @Nullable
     @OneToMany(mappedBy="user")
     private List<Entry> entries;
 
+    public List<Entry> getEntries() {
+        return entries;
+    }
 
-    public User(String firstName, String email,String password) {
-        this.userName = firstName;
-        this.password = password;
+    public void setEntries(List<Entry> entries) {
+        this.entries = entries;
+    }
+
+    public User(int userId, String userName, String email, @Nullable String password, @Nullable List<Entry> entries) {
+        this.userId = userId;
+        this.userName = userName;
         this.email = email;
+        this.password = password;
+        this.entries = entries;
     }
 
     public User() {

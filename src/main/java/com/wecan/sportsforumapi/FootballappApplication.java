@@ -26,19 +26,18 @@ public class FootballappApplication {
 	}
 
 	private void createInstrcutor(EntryService entryService, TitleService titleService, UserRepository userRepository) {
-		Title title = new Title("Diego Rossi");
-		titleService.save(title);
-		User adem = new User("adem","ademm.soydan@gmail.com","123");
-		User ali = new User("ali","ali.koc@gmail.com","123");
-		User jorge = new User("jorge","jorge.jesus@gmail.com","123");
-		userRepository.save(adem);
-		userRepository.save(ali);
-		userRepository.save(jorge);
-		Entry entry = new Entry("Düğünümde oynatmamHemen Satın Gitsin bu lavuğu",title,adem);
-		Entry entry2 = new Entry("Aslında fena değil ya",title,ali);
-		Entry entry3 = new Entry("Aşığım bu çocuğa",title,jorge);
+		Title title = new Title(-1, "Diego Rossi", null);
+		title = titleService.saveTitle(title);
+		User adem = new User(-1,"adem","ademm.soydan@gmail.com","123", null);
+		User ali = new User(-1,"ali","ali.koc@gmail.com","123",null);
+		User jorge = new User(-1,"jorge","jorge.jesus@gmail.com","123",null);
+		adem = userRepository.save(adem);
+		ali = userRepository.save(ali);
+		jorge = userRepository.save(jorge);
 
-
+		Entry entry = new Entry(-1,"Düğünümde oynatmamHemen Satın Gitsin bu lavuğu",title,adem,0);
+		Entry entry2 = new Entry(-1,"Aslında fena değil ya",title,ali,0);
+		Entry entry3 = new Entry(-1,"Aşığım bu çocuğa",title,jorge,0);
 
 		entryService.save(entry);
 		entryService.save(entry2);

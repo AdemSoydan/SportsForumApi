@@ -2,6 +2,8 @@ package com.wecan.sportsforumapi.service;
 
 import com.wecan.sportsforumapi.entity.Entry;
 import com.wecan.sportsforumapi.repository.EntryRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +30,8 @@ public class EntryServiceImpl implements EntryService {
     }
 
     @Override
-    public void save(Entry entry) {
-        repository.save(entry);
+    public ResponseEntity save(Entry entry) {
+        Entry e = repository.save(entry);
+        return new ResponseEntity(e,HttpStatus.OK);
     }
 }

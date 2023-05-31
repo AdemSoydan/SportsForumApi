@@ -1,6 +1,7 @@
 package com.wecan.sportsforumapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 
@@ -19,16 +20,17 @@ public class Title {
     @Column(name = "title_name")
     private String titleName;
 
-    @JsonManagedReference()
+
     @OneToMany(mappedBy="title")
     private List<Entry> entries;
 
     public Title() {
     }
 
-    public Title(String titleName) {
+    public Title(int tId, String titleName, List<Entry> entries) {
+        this.tId = tId;
         this.titleName = titleName;
-        entries = new ArrayList<>();
+        this.entries = entries;
     }
 
     public void addEntry(Entry entry){

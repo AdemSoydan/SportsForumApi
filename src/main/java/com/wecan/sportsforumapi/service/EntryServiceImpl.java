@@ -34,4 +34,23 @@ public class EntryServiceImpl implements EntryService {
         Entry e = repository.save(entry);
         return new ResponseEntity(e,HttpStatus.OK);
     }
+
+    @Override
+    public int likeEntry(int id) {
+        return getAndChangeAnEntry(id,+1);
+
+    }
+
+    @Override
+    public int unlikeEntry(int id) {
+        return getAndChangeAnEntry(id,-1);
+    }
+
+    public int getAndChangeAnEntry(int id, int one){
+        Entry entry = repository.findByeId(id);
+        int newNoOfLike = entry.getNoOfLiked() + one;
+        entry.setNoOfLiked(newNoOfLike);
+        repository.save(entry);
+        return newNoOfLike;
+    }
 }

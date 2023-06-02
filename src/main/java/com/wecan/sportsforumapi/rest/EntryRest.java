@@ -3,10 +3,7 @@ package com.wecan.sportsforumapi.rest;
 import com.wecan.sportsforumapi.entity.Entry;
 import com.wecan.sportsforumapi.service.EntryService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +23,14 @@ public class EntryRest {
     @GetMapping("/entries")
     public List<Entry> getEntries(@RequestBody Entry entry){
        return service.getAllEntries();
+    }
+
+    @GetMapping("/likeentry/{id}")
+    public int likeAnEntry(@PathVariable int id){
+        return service.likeEntry(id);
+    }
+    @GetMapping("/unlikeentry/{id}")
+    public int unlikeAnEntry(@PathVariable int id){
+        return service.unlikeEntry(id);
     }
 }

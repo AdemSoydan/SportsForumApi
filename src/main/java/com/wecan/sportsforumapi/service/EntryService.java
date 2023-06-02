@@ -12,4 +12,7 @@ public interface EntryService {
 
     ResponseEntity save(Entry entry);
 
+    int likeEntry(int id);
+    int unlikeEntry(int id);
+
 }

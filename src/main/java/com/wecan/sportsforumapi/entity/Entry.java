@@ -1,9 +1,6 @@
 package com.wecan.sportsforumapi.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
@@ -17,6 +14,7 @@ public class Entry {
     @Column(name = "entry_text")
     private String entryText;
     @ManyToOne
+    @JsonIgnore
     @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="tId")
     @JoinColumn(name="title_id")
     private Title title;

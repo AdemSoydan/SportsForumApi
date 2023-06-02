@@ -24,11 +24,15 @@ public class TitleServiceImpl implements TitleService {
     }
 
     @Override
-    public Title findById(int id) {
+    public ResponseEntity findById(int id) {
         Optional<Title> optionalTitle = titleRepository.findById(id);
         if(optionalTitle.isPresent())
-            return optionalTitle.get();
-        return null;
+        {
+            Title dbTitle = optionalTitle.get();
+            return new ResponseEntity(dbTitle,HttpStatus.OK);
+        }
+
+        return new ResponseEntity(optionalTitle.get(),HttpStatus.BAD_REQUEST);
     }
 
     @Override

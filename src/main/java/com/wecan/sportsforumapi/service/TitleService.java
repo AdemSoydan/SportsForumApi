@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface TitleService {
-    Title findById(int id);
+    ResponseEntity findById(int id);
     List<Title> findAll();
     ResponseEntity save(Title title);
 

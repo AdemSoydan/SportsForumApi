@@ -26,7 +26,6 @@ public class User {
 
    // @JsonBackReference
     @Nullable
-    @JsonIgnore
     @OneToMany(mappedBy="user")
     private List<Entry> entries;
 

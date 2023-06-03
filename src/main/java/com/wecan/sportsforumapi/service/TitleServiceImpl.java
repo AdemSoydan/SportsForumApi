@@ -25,14 +25,15 @@ public class TitleServiceImpl implements TitleService {
 
     @Override
     public ResponseEntity findById(int id) {
-        Optional<Title> optionalTitle = titleRepository.findById(id);
-        if(optionalTitle.isPresent())
+        Title optionalTitle = titleRepository.findById(id);
+        if(optionalTitle != null)
         {
-            Title dbTitle = optionalTitle.get();
+            Title dbTitle = optionalTitle;
+            dbTitle.getEntries().forEach(x -> x.setTitle(null));
             return new ResponseEntity(dbTitle,HttpStatus.OK);
         }
 
-        return new ResponseEntity(optionalTitle.get(),HttpStatus.BAD_REQUEST);
+        return new ResponseEntity(optionalTitle,HttpStatus.BAD_REQUEST);
     }
 
     @Override
@@ -53,13 +54,18 @@ public class TitleServiceImpl implements TitleService {
 
     @Override
     public ResponseEntity saveWithEntry(TitleSaveRequest request) {
-        Title title = titleRepository.save(request.getTitle());
-        Entry e = request.getEntry();
-        e.setTitle(title);
-        Entry dbEntry = entryRepository.save(e);
-
-        TitleSaveRequest response = new TitleSaveRequest(request.getTitle(),e);
-
-        return new ResponseEntity(response,HttpStatus.OK);
+        Title dbTitle = titleRepository.findById(request.getTitle().gettId());
+        if(dbTitle == null){
+            Title title = titleRepository.save(request.getTitle());
+            Entry e = request.getEntry();
+            e.setTitle(title);
+            Entry dbEntry = entryRepository.save(e);
+            TitleSaveRequest response = new TitleSaveRequest(request.getTitle(),e);
+            return new ResponseEntity(response,HttpStatus.OK);
+        }
+        else{
+            Entry entry = entryRepository.save(new Entry());
+            return new ResponseEntity(new TitleSaveRequest(dbTitle,entry),HttpStatus.OK);
+        }
     }
 }

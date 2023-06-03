@@ -14,14 +14,12 @@ public class Entry {
     @Column(name = "entry_text")
     private String entryText;
     @ManyToOne
-    @JsonIgnore
-    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="tId")
+    @JsonIdentityInfo(scope = Title.class , generator= ObjectIdGenerators.PropertyGenerator.class, property="tId")
     @JoinColumn(name="title_id")
     private Title title;
 
-
     @ManyToOne
-    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="userId")
+    //@JsonIdentityInfo(scope = User.class ,generator= ObjectIdGenerators.PropertyGenerator.class, property="userId")
     @JoinColumn(name="user_id")
     private User user;
 

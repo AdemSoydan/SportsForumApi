@@ -8,10 +8,13 @@ import com.wecan.sportsforumapi.service.EntryService;
 import com.wecan.sportsforumapi.service.TitleService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
-@SpringBootApplication
+@EnableAutoConfiguration(exclude = { SecurityAutoConfiguration.class })
+@SpringBootApplication()
 public class FootballappApplication {
 
 	public static void main(String[] args) {

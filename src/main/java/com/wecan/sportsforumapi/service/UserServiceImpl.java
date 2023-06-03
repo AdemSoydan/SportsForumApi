@@ -2,8 +2,12 @@ package com.wecan.sportsforumapi.service;
 
 import com.wecan.sportsforumapi.entity.User;
 import com.wecan.sportsforumapi.repository.UserRepository;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,8 +15,11 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     UserRepository repository;
 
-    public UserServiceImpl(UserRepository repository) {
-        this.repository = repository;
+    PasswordEncoder encoder;
+
+
+    public UserServiceImpl(UserRepository repository, BCryptPasswordEncoder encoder) {
+        this.repository = repository; this.encoder = encoder;
     }
 
     @Override
@@ -37,6 +44,7 @@ public class UserServiceImpl implements UserService {
         if(u != null){
             return new ResponseEntity(user, HttpStatus.CONFLICT);
         }
+        user.setPassword(encoder.encode(user.getPassword()));
         repository.save(user);
         return new ResponseEntity(user,HttpStatus.OK);
     }
@@ -45,9 +53,11 @@ public class UserServiceImpl implements UserService {
     public ResponseEntity checkUserIsValid(User user) {
         String userName = user.getUserName();
         User dbUser = repository.findByUserName(userName);
-        if(dbUser == null || !user.getPassword().equals(dbUser.getPassword()))
-            return new ResponseEntity(HttpStatus.CONFLICT);
+        String passw = user.getPassword();
+        if(passw != null && BCrypt.checkpw(user.getPassword(),dbUser.getPassword()))
+            return new ResponseEntity(dbUser,HttpStatus.OK);
 
-        return new ResponseEntity(dbUser, HttpStatus.OK);
+        return new ResponseEntity(user, HttpStatus.CONFLICT);
     }
+
 }

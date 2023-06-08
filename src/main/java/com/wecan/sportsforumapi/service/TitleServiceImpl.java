@@ -30,6 +30,9 @@ public class TitleServiceImpl implements TitleService {
         {
             Title dbTitle = optionalTitle;
             dbTitle.getEntries().forEach(x -> x.setTitle(null));
+            dbTitle.getEntries().forEach(x -> x.getUser().setPassword(null));
+            dbTitle.getEntries().forEach(x -> x.getUser().setEntries(null));
+            dbTitle.getEntries().forEach(x -> x.getUser().setEmail(null));
             return new ResponseEntity(dbTitle,HttpStatus.OK);
         }
 

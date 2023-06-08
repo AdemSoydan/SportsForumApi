@@ -40,6 +40,9 @@ public class EntryServiceImpl implements EntryService {
         Entry e = repository.save(entry);
         User user = userRepository.findById(entry.getUser().getUserId());
         Title title = titleRepository.findById(entry.getTitle().gettId());
+        user.setPassword(null);
+        user.setEmail(null);
+        user.setEntries(null);
         title.setEntries(null);
         e.setUser(user);
         e.setTitle(title);

@@ -26,7 +26,7 @@ public class UserRest {
 
     @PostMapping(value = "/user", consumes = {"application/json"})
     public ResponseEntity saveUser(@RequestBody User user){
-       return service.save(user);
+        return service.save(user);
     }
 
     @PostMapping("/userlogin")

@@ -54,9 +54,11 @@ public class UserServiceImpl implements UserService {
         String userName = user.getUserName();
         User dbUser = repository.findByUserName(userName);
         String passw = user.getPassword();
-        if(passw != null && BCrypt.checkpw(user.getPassword(),dbUser.getPassword()))
-            return new ResponseEntity(dbUser,HttpStatus.OK);
 
+        if(passw != null && BCrypt.checkpw(user.getPassword(),dbUser.getPassword())){
+            dbUser.setPassword("null");
+            return new ResponseEntity(dbUser,HttpStatus.OK);
+        }
         return new ResponseEntity(user, HttpStatus.CONFLICT);
     }
 

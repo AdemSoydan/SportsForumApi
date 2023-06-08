@@ -19,7 +19,7 @@ public class Entry {
     private Title title;
 
     @ManyToOne
-    //@JsonIdentityInfo(scope = User.class ,generator= ObjectIdGenerators.PropertyGenerator.class, property="userId")
+   // @JsonIdentityInfo(scope = User.class ,generator= ObjectIdGenerators.PropertyGenerator.class, property="userId")
     @JoinColumn(name="user_id")
     private User user;
 

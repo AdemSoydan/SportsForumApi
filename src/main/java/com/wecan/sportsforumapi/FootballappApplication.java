@@ -21,16 +21,4 @@ public class FootballappApplication {
 		SpringApplication.run(FootballappApplication.class, args);
 	}
 
-	@Bean
-	public CommandLineRunner commandLineRunner(EntryService entryService, TitleService titleService, UserRepository userRepository){
-		return runner ->{
-			createInstrcutor(entryService,titleService,userRepository);
-		};
-	}
-
-	private void createInstrcutor(EntryService entryService, TitleService titleService, UserRepository userRepository) {
-
-	}
-
-
 }
